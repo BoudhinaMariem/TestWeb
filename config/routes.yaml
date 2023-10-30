@@ -1,0 +1,3 @@
+index:
+    path: /Arbre
+    controller: App\Controller\ArbreController::index

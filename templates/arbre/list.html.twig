@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Liste des arbres </h1>
+    <title>{% block title %}Welcome Mimi!{% endblock %}</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+   <a href="{{ path('add_arbre') }}" class="btn btn-primary">New arbre</a>
+
+   {% if arbres is defined and arbres|length > 0 %}
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Parc Nom</th>
+                <th>date</th>
+                <th>A risque?</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in arbres %}
+                <tr>
+                    <td>{{ a.id }}</td>
+                    <td>{{ a.parc.nom|upper }}</td>
+                    <td>{{ a.dateImplentation|date('Y-m-d H:i:s') }}</td>
+                    <td>{% if a.aRisque %}
+                        Oui {% else %}
+                        Non {% endif %}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p class="mt-3">Aucun Arbre trouvé.</p>
+    {% endif %}
+{% endblock %}
